@@ -53,3 +53,14 @@ class Test(TestCase):
         self.assertEqual(oasis.get_name(), 'OASIS')
         self.assertEqual(oasis.get_data()['X'].shape, (436, 256, 256, 1)) # 436 images, 256x256 pixels, 1 colour channel
         self.assertEqual(oasis.get_data()['Y'].shape, (436,))
+
+    def test_adni(self):
+        """
+        Test adni dataset
+        """
+        from Problems.ADNI import ADNI
+        adni= ADNI()
+        self.assertEqual(adni.get_classes(), [0, 1])
+        self.assertEqual(adni.get_name(), 'ADNI')
+        self.assertEqual(adni.get_data()['X'].shape, (1743, 256, 256, 1)) # 436 images, 256x256 pixels, 1 colour channel
+        self.assertEqual(adni.get_data()['Y'].shape, (1743,))

@@ -192,7 +192,7 @@ def read_parameters():
 
 
 def read_arguments(argv, params):
-    error_text = 'Usage: Program.py [options...]\n \n -> Options:\n \t-i\t:\tLaunch shell for interactive mode.\n \t-T\t:\tExecute unitary tests.\n \nTry option -h for help\n'
+    error_text = 'Usage: Program.py [options...]\n \n -> Options:\n \t-i\t:\tLaunch shell for interactive mode.\n \t-t\t:\tExecute unitary tests.\n \nTry option -h for help\n'
 
     try:
         opts, args = getopt.getopt(argv, "hit", ['device='])

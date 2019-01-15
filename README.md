@@ -7,10 +7,10 @@ Máster de Bioinformática para Ciencias de la Salud.
 Universidad de A Coruña.
 
 ## Librerías necesarias
-Para la ejecución de este proyecto son necesarias las librerías OpenCV, Numpy, Scikit-Learn, Pandas, h5py y Keras. Se instalan de la siguiente manera:
+Para la ejecución de este proyecto son necesarias las librerías OpenCV, Numpy, Scikit-Learn, Pandas, h5py, TensorFlow y Keras. Se instalan de la siguiente manera:
 
 ```bash
-pip install opencv-python numpy scikit-learn pandas h5py keras
+pip install opencv-python numpy scikit-learn pandas h5py tensorflow keras
 ```
 ## Uso
 

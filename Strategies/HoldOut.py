@@ -29,6 +29,8 @@ class HoldOut(Strategy):
 
         title = model.get_name() + '_' + time.strftime("%Y_%m_%d_%H_%M_%S")
 
+        validation_percentage = params['validation_split']
+
         repetitions_scores = []
         for i in range(params['repetitions']):
             test_results = []
@@ -42,10 +44,11 @@ class HoldOut(Strategy):
 
             X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=params['holdout_test_split'], random_state=seed)  # We randomize split too
 
+
             # Class weight if there are unbalanced classes
             from sklearn.utils import class_weight
             # class_weight = class_weight.compute_class_weight('balanced',numpy.unique(Y), Y)
-            sample_weight = class_weight.compute_sample_weight(class_weight={1:1,0:0.5}, y=Y_train)
+            sample_weight = class_weight.compute_sample_weight(class_weight='balanced', y=Y_train)
 
             if (self.get_params()['problem_type'] == 'classification'): #and not (params['use_distillery'] and model.get_name().lower() != 'distillery_network'):
                     Y_train = keras.utils.to_categorical(Y_train, num_classes=len(numpy.unique(Y)))
@@ -60,9 +63,10 @@ class HoldOut(Strategy):
                               verbose=params['verbose'], mode='min'))
 
             # Fit the architecture
-            architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],validation_split=params['validation_split'],
+            architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],
+                             validation_split=validation_percentage,
                              callbacks=callbacks_list,
-                             verbose=params['verbose'],sample_weight=sample_weight)
+                             verbose=params['verbose'], sample_weight=sample_weight)
 
             # Data Augmentation
             if params['augmentation']:

@@ -70,9 +70,6 @@ class Sklearn_KFold(Strategy):
                 # Fit the architecture
                 sklearn_model.fit(X_train, Y_train, sample_weight=sample_weight)
 
-                # Fit the architecture
-                sklearn_model.fit(X_train, Y_train)
-
                 # Evaluate the architecture
                 print('Evaluation metrics\n')
 

@@ -74,11 +74,10 @@ class KFold(Strategy):
                                   verbose=params['verbose'], mode='min'))
 
                 # Fit the architecture
-                architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],validation_split=validation_percentage,
+                architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],
+                                 validation_split=validation_percentage,
                                  callbacks=callbacks_list,
-                                 verbose=params['verbose'],
-                                 sample_weight = sample_weight)
-
+                                 verbose=params['verbose'], sample_weight=sample_weight)
 
                 # Data Augmentation
                 if params['augmentation']:

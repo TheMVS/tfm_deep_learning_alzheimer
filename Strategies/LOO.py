@@ -53,7 +53,7 @@ class LOO(Strategy):
             # Class weight if there are unbalanced classes
             from sklearn.utils import class_weight
             # class_weight = class_weight.compute_class_weight('balanced',numpy.unique(Y), Y)
-            sample_weight = class_weight.compute_sample_weight(class_weight={1:1,0:0.5}, y=Y_train)
+            sample_weight = class_weight.compute_sample_weight(class_weight='balanced', y=Y_train)
 
             if (self.get_params()[
                 'problem_type'] == 'classification'):  # and not(params['use_distillery'] and model.get_name().lower() != 'distillery_network'):
@@ -69,10 +69,10 @@ class LOO(Strategy):
                               verbose=params['verbose'], mode='min'))
 
             # Fit the architecture
-            architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],validation_split=validation_percentage,
+            architecture.fit(X_train, Y_train, epochs=params['epochs'], batch_size=params['batch'],
+                             validation_split=validation_percentage,
                              callbacks=callbacks_list,
-                             verbose=params['verbose'],sample_weight=sample_weight)
-
+                             verbose=params['verbose'], sample_weight=sample_weight)
 
             # Data Augmentation
             if params['augmentation']:

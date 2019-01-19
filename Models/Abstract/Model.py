@@ -47,15 +47,16 @@ class Model(abc.ABCMeta('ABC', (object,), {'__slots__': ()})):
 
     def set_sklearn_model(self):
         'Creates de specified model'
-        if (self.__params['sklearn_model'].lower() == 'linear_regression'):
-            from sklearn import linear_model
-            self.__sklearn_model = linear_model.LinearRegression()
-        else:
-            from sklearn import svm
-            if (self.__params['problem_type'].lower() == 'regression'):
-                self.__sklearn_model = svm.SVR(tol=self.__params['min_delta'])
+        if self.__params['use_sklearn']:
+            if (self.__params['sklearn_model'].lower() == 'linear_regression'):
+                from sklearn import linear_model
+                self.__sklearn_model = linear_model.LinearRegression()
             else:
-                self.__sklearn_model = svm.SVC(tol=self.__params['min_delta'])
+                from sklearn import svm
+                if (self.__params['problem_type'].lower() == 'regression'):
+                    self.__sklearn_model = svm.SVR(tol=self.__params['min_delta'])
+                else:
+                    self.__sklearn_model = svm.SVC(tol=self.__params['min_delta'])
 
     # Other methods
 

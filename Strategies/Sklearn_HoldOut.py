@@ -53,10 +53,11 @@ class Sklearn_HoldOut(Strategy):
             # Class weight if there are unbalanced classes
             from sklearn.utils import class_weight
             # class_weight = class_weight.compute_class_weight('balanced',numpy.unique(Y), Y)
-            sample_weight = class_weight.compute_sample_weight(class_weight={1:1,0:0.5}, y=Y_train)
+            sample_weight = class_weight.compute_sample_weight(class_weight='balanced', y=Y_train)
 
             # Fit the architecture
             sklearn_model.fit(X_train, Y_train, sample_weight=sample_weight)
+
             # Evaluate the architecture
             print('Evaluation metrics\n')
 
